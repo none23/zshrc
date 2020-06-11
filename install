@@ -1,0 +1,16 @@
+#!/bin/zsh
+
+
+if ([[ "$PWD" == "$XDG_CONFIG_HOME/zsh" ]]); then
+  if ([[ -a "$XDG_CONFIG_HOME/zsh" ]]); then
+    mv "$XDG_CONFIG_HOME/zsh" "$XDG_CONFIG_HOME/zsh.bkp";
+  fi
+
+  ln -s "$XDG_CONFIG_HOME/zsh" "$PWD";
+fi
+
+if ([[ -a "$HOME/.zshrc" ]]); then
+  mv "$HOME/.zshrc" "$HOME/.zshrc.bkp";
+fi
+
+ln -s "$PWD/.zshrc" "$HOME/.zshrc"
