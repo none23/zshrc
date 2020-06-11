@@ -1,0 +1,6 @@
+.zdirs
+.cache
+.zcompdump
+.zcompcache
+fzf/
+syntax-highlighting/
