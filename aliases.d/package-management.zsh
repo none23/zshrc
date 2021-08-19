@@ -2,7 +2,7 @@
 
 __command_exists () { hash "$1" 2>/dev/null }
 
-alias npmup="(npm outdated -g | grep -P '^[a-z-]+' -o) | xargs -d \\\\n npm i -g"
+alias npmup="(npm outdated -g | grep -P '^[a-z-]+' -o) | xargs -r -d \\\\n npm i -g"
 
 if __command_exists yay; then
   alias Y='pacman -Syu && yay -Syua && npmup'
@@ -16,4 +16,8 @@ elif __command_exists apt; then
   alias apt='sudo apt'
 elif __command_exists brew; then
   alias Y='brew update && brew upgrade && (brew cu || brew tap buo/cask-upgrade && brew update && brew cu) && npmup'
+fi
+
+if __command_exists hub; then
+  alias git='hub'
 fi

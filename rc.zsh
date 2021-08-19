@@ -8,9 +8,6 @@ function __ensure_directory_exists () {
   [[ -d "$1" ]] || mkdir -p "$1"
 }
 
-function __add_to_path () {
-  [[ -n "$1" ]] && __ensure_directory_exists "$1" && export PATH="$1:$PATH"
-}
 
 # vim-mode
 bindkey -v
@@ -24,8 +21,9 @@ setopt appendhistory
 
 
 # path
-__add_to_path "$HOME/.local/bin"
-__add_to_path "$HOME/.local/node_modules/bin"
+__ensure_directory_exists "$HOME/.local/bin"
+__ensure_directory_exists "$HOME/.local/node_modules/bin"
+export PATH="$HOME/.local/bin:$HOME/.local/node_modules/bin:$PATH"
 
 
 # ssh-agent

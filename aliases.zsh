@@ -23,6 +23,9 @@ alias reboot='sudo systemctl reboot'
 __command_exists nvim && alias -g vim='nvim'
 __command_exists nvim && alias -g vimdiff='nvim -d'
 
+# use ag instead of ack
+alias ack=ag
+
 # dd
 alias dd='sudo dd bs=4M status=progress'
 alias df='df -h'
@@ -55,12 +58,6 @@ __command_exists nmap && alias nmap='sudo nmap'
 
 # ping
 pn () { [[ ! "$*" ]] && ping -c 5 -i 0.2 8.8.8.8 || ping -c 5 -i 0.2 "$*" }
-
-# use local node packages
-__command_exists flow      && alias flow='$(npm bin)/flow'
-__command_exists jest      && alias jest='$(npm bin)/jest'
-__command_exists eslint    && alias eslint='$(npm bin)/eslint'
-__command_exists stylelint && alias stylelint='$(npm bin)/stylelint'
 
 # tunnel local port
 __command_exists lt        && alias lt='lt -l localhost -s none23'

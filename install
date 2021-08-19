@@ -1,6 +1,5 @@
 #!/bin/zsh
 
-
 if ([[ "$PWD" == "$XDG_CONFIG_HOME/zsh" ]]); then
   if ([[ -a "$XDG_CONFIG_HOME/zsh" ]]); then
     mv "$XDG_CONFIG_HOME/zsh" "$XDG_CONFIG_HOME/zsh.bkp";
