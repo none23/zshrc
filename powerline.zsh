@@ -3,7 +3,7 @@
 __command_exists () { hash "$1" 2>/dev/null }
 __file_exists () { [[ -a "$1" ]] }
 
-__SITE_PACKAGES="/usr/lib/python3.9/site-packages" # TODO: set this automatically
+__SITE_PACKAGES="/usr/lib/python3.10/site-packages" # TODO: set this automatically
 __POWERLINE_INIT="$__SITE_PACKAGES/powerline/bindings/zsh/powerline.zsh"
 
 __init_powerline () {
