@@ -22,8 +22,7 @@ setopt appendhistory
 
 # path
 __ensure_directory_exists "$HOME/.local/bin"
-__ensure_directory_exists "$HOME/.local/node_modules/bin"
-export PATH="$HOME/.local/bin:$HOME/.local/node_modules/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.local/node_modules/bin:/usr/bin:/usr/bin/core_perl:/usr/bin/site_perl:/usr/bin/vendor_perl:$PATH"
 
 
 # ssh-agent
