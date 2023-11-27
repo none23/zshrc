@@ -65,4 +65,4 @@ __command_exists lt        && alias lt='lt -l localhost -s none23'
 # open ranger in curent directory by default
 __command_exists ranger && rr () { [[ -n "$1" ]] && ranger "$*" || ranger "$(pwd)" }
 
-for file in "$XDG_CONFIG_HOME"/zsh/aliases.d/*.zsh; do source "$file"; done
+for file in "$HOME"/.config/zsh/aliases.d/*.zsh; do source "$file"; done

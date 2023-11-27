@@ -1,10 +1,7 @@
 #!/bin/zsh
 
-__directory_exists () { [[ -d "$1" ]] }
-
-__PLUGIN_PATH="$XDG_CONFIG_HOME/zsh/syntax-highlighting"
-__directory_exists "$__PLUGIN_PATH" \
-  || git clone https://github.com/zsh-users/zsh-syntax-highlighting \
+[[ -d "$HOME/.config/zsh/syntax-highlighting" ]] \
+  || git clone https://github.com/zsh-users/zsh-syntax-highlighting "$HOME/.config/zsh/syntax-highlighting"  \
   || echo 'failed to install syntax-highlighting for zsh'
 
-source "$__PLUGIN_PATH/zsh-syntax-highlighting.zsh" 2> /dev/null
+source "$HOME/.config/zsh/syntax-highlighting/zsh-syntax-highlighting.zsh" 2> /dev/null

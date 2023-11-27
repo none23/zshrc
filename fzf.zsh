@@ -2,7 +2,7 @@
 
 __file_exists () { [[ -a "$1" ]] }
 
-__FZF_ROOT="$ZDOTDIR/fzf"
+__FZF_ROOT="$HOME/.fzf"
 
 # Use fd instead of the default find command for listing path candidates.
 _fzf_compgen_path() { fd --hidden --follow --exclude ".git" . "$1" }
@@ -22,3 +22,4 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 source "$__FZF_ROOT/shell/completion.zsh" 2> /dev/null
 source "$__FZF_ROOT/shell/key-bindings.zsh"
+

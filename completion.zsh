@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-zstyle :compinstall filename "$XDG_CONFIG_HOME/zsh/rc"
+zstyle :compinstall filename "$HOME/.config/zsh/rc"
 zstyle ":completion:*:commands" rehash 1 # do not trust completions cache
 zstyle ':acceptline' rehash true
 zstyle ':completion:*:*:*:users' ignored-patterns \
