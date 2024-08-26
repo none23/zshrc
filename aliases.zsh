@@ -20,6 +20,7 @@ alias shutdown='sudo systemctl poweroff'
 alias reboot='sudo systemctl reboot'
 
 # replace vim with neovim
+__command_exists nvim && alias -g vi='nvim'
 __command_exists nvim && alias -g vim='nvim'
 __command_exists nvim && alias -g vimdiff='nvim -d'
 
