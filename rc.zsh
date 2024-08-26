@@ -15,6 +15,7 @@ setopt appendhistory
 export ZDOTDIR="$HOME/.config/zsh"
 [[ -d "$HOME/.local/bin" ]] || mkdir -p "$HOME/.local/bin" ;
 export PATH="$HOME/.local/bin:$HOME/.local/share/npm/bin:/usr/bin:/usr/bin/core_perl:/usr/bin/site_perl:/usr/bin/vendor_perl:$PATH"
+[[ -d "$HOME/.local/share/cargo/bin" ]] && PATH="$HOME/.local/share/cargo/bin:$PATH"
 
 
 # ssh-agent
