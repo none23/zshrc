@@ -24,12 +24,15 @@ __command_exists nvim && alias -g vi='nvim'
 __command_exists nvim && alias -g vim='nvim'
 __command_exists nvim && alias -g vimdiff='nvim -d'
 
+__command_exists lazygit && alias lg='lazygit'
+
 # use ag instead of ack
 alias ack=ag
 
-# dd
 alias dd='sudo dd bs=4M status=progress'
+
 alias df='df -h'
+
 
 # add sudo
 alias cfdisk 'sudo cfdisk'
@@ -61,7 +64,7 @@ __command_exists nmap && alias nmap='sudo nmap'
 pn () { [[ ! "$*" ]] && ping -c 5 -i 0.2 8.8.8.8 || ping -c 5 -i 0.2 "$*" }
 
 # tunnel local port
-__command_exists lt        && alias lt='lt -l localhost -s none23'
+__command_exists lt && alias lt='lt -l localhost -s none23'
 
 # open ranger in curent directory by default
 __command_exists ranger && rr () { [[ -n "$1" ]] && ranger "$*" || ranger "$(pwd)" }
