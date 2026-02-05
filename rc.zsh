@@ -6,8 +6,8 @@ set -o vi
 
 # history
 export HISTFILE="$HOME/.histfile"
-export HISTSIZE=256000
-export SAVEHIST=2048000
+export HISTSIZE=25600000
+export SAVEHIST=20480000
 setopt appendhistory
 
 
