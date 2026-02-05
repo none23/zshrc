@@ -13,3 +13,10 @@ export XDG_CACHE_HOME="$HOME/.cache"
 [[ $- != *i* ]] && return
 [[ -a "$XDG_CONFIG_HOME/zsh/rc.zsh" ]] \
   && source "$XDG_CONFIG_HOME/zsh/rc.zsh"
+
+
+precmd() {
+  if [[ -n "${CODEX_SESSION:-}" ]]; then
+    echo -ne '\a' > /dev/tty
+  fi
+}
