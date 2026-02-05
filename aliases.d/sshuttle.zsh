@@ -15,7 +15,7 @@ if __command_exists sshuttle; then
     fi
   }
 
-  function sshide {
+  function sshive {
     local __SHUTTLE_PIDFILE
     if [[ -a __SHUTTLE_PIDFILE ]]; then
       echo 'sshuttle is already running'
