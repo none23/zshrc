@@ -63,6 +63,34 @@ __command_exists nmap && alias nmap='sudo nmap'
 # ping
 pn () { [[ ! "$*" ]] && ping -c 5 -i 0.2 8.8.8.8 || ping -c 5 -i 0.2 "$*" }
 
+# kill any TCP process bound to a local port using ss
+clearport () {
+  local port="$1"
+  local pid_text
+  local -a pids
+
+  if [[ -z "$port" || "$port" != <-> ]]; then
+    echo "usage: clearport <port>" >&2
+    return 1
+  fi
+
+  pid_text="$(ss -tanpH "sport = :$port" 2>/dev/null | grep -Eo 'pid=[0-9]+' | cut -d= -f2 | sort -u)"
+
+  if [[ -z "$pid_text" ]]; then
+    echo "clearport: no TCP process found on port $port" >&2
+    return 1
+  fi
+
+  pids=(${(f)pid_text})
+
+  if kill "${pids[@]}"; then
+    echo "clearport: killed PID(s) ${pids[*]} on tcp:$port"
+  else
+    echo "clearport: failed to kill PID(s) ${pids[*]} on tcp:$port" >&2
+    return 1
+  fi
+}
+
 # tunnel local port
 __command_exists lt && alias lt='lt -l localhost -s none23'
 
