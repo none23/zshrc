@@ -20,3 +20,6 @@ precmd() {
     echo -ne '\a' > /dev/tty
   fi
 }
+
+# opencode
+export PATH=/home/n/.opencode/bin:$PATH
