@@ -18,6 +18,12 @@ elif __command_exists brew; then
   alias Y='brew update && brew upgrade && (brew cu || brew tap buo/cask-upgrade && brew update && brew cu) && npmup'
 fi
 
+if __command_exists sfw; then
+  alias pnpm='sfw pnpm'
+  alias npm='sfw npm'
+  alias yarn='sfw yarn'
+fi
+
 if __command_exists hub; then
   alias git='hub'
 fi
