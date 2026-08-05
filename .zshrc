@@ -37,7 +37,6 @@ __alias_command_if_exists() { __command_exists "$1" && alias "$1"="$2" }
 export ACKRC="$XDG_CONFIG_HOME/ack/ackrc"
 export ANDROID_SDK_HOME="$XDG_CONFIG_HOME/android"
 export ANDROID_HOME="$XDG_CONFIG_HOME/android"
-export ATOM_HOME="$XDG_DATA_HOME/atom"
 export AWS_CONFIG_FILE="$XDG_CONFIG_HOME/aws/config"
 export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME/aws/credentials"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
@@ -52,7 +51,6 @@ export PSQLRC="$XDG_CONFIG_HOME/pg/psqlrc"
 export PSQL_HISTORY="$XDG_CACHE_HOME/pg/psql_history"
 export SCREENRC="$XDG_CONFIG_HOME/screen/screenrc"
 export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
-export WAKATIME_HOME="$XDG_CONFIG_HOME/wakatime"
 export WGETRC="$XDG_CONFIG_HOME/wgetrc"
 
 __command_exists wakatime && __ensure_directory_exists "$WAKATIME_HOME"
@@ -104,31 +102,16 @@ __command_exists lazygit && alias lg='lazygit'
 alias ack=ag
 alias dd='sudo dd bs=4M status=progress'
 alias df='df -h'
-alias codex=cdx
 
-alias cfdisk='sudo cfdisk'
-alias cgdisk='sudo cgdisk'
-alias du='sudo du -h'
-alias fdisk='sudo fdisk'
-alias fstrim='sudo fstrim'
-alias gdisk='sudo gdisk'
-alias hdparm='sudo hdparm'
 alias lsmod='sudo lsmod'
-alias mkinitcpio='sudo mkinitcpio'
-alias mkfs.ext4='sudo mkfs.ext4'
-alias mkfs.ext3='sudo mkfs.ext3'
-alias mkfs.ext2='sudo mkfs.ext2'
 alias modprobe='sudo modprobe'
 alias mount='sudo mount'
 alias rfkill='sudo rfkill'
 alias rmmod='sudo rmmod'
-alias skill='sudo kill'
-alias skillall='sudo killall'
 alias systemctl='sudo systemctl'
 alias umount='sudo umount'
 __command_exists gparted && alias gparted='sudo gparted'
 __command_exists masscan && alias masscan='sudo masscan'
-__command_exists minicom && alias minicom='sudo minicom'
 __command_exists nmap && alias nmap='sudo nmap'
 
 pn() { [[ ! "$*" ]] && ping -c 5 -i 0.2 8.8.8.8 || ping -c 5 -i 0.2 "$*" }
@@ -161,24 +144,6 @@ clearport() {
 
 __command_exists lt && alias lt='lt -l localhost -s none23'
 __command_exists ranger && rr() { [[ -n "$1" ]] && ranger "$*" || ranger "$(pwd)" }
-
-# Tor
-if __command_exists tor; then
-  __ensure_tor_is_running() {
-    if [[ -n "$(ps -ef | grep tor | grep -v grep)" ]]; then
-      echo "tor already running"
-    else
-      sudo systemctl start tor.service
-      echo "tor started"
-    fi
-  }
-
-  if __command_exists chromium; then
-    alias chromium-tor='__ensure_tor_is_running; chromium --proxy-server="socks5://localhost:9050" --host-resolver-rules="MAP * 0.0.0.0 , EXCLUDE localhost"'
-  elif __command_exists chromium-browser; then
-    alias chromium-tor='__ensure_tor_is_running; chromium-browser --proxy-server="socks5://localhost:9050" --host-resolver-rules="MAP * 0.0.0.0 , EXCLUDE localhost"'
-  fi
-fi
 
 # Archive extraction
 extract() {
@@ -229,6 +194,10 @@ elif __command_exists brew; then
   alias Y='brew update && brew upgrade && (brew cu || brew tap buo/cask-upgrade && brew update && brew cu) && npmup'
 fi
 
+[[ -a "$ZDOTDIR/local-aliases.zsh" ]] && source "$ZDOTDIR/local-aliases.zsh"
+
+
+# SFW
 if __command_exists sfw; then
   alias pnpm='sfw pnpm'
   alias npm='sfw npm'
@@ -236,7 +205,6 @@ if __command_exists sfw; then
   alias bun='sfw bun'
 fi
 
-__command_exists hub && alias git='hub'
 
 # sshuttle
 if __command_exists sshuttle; then
@@ -259,33 +227,6 @@ if __command_exists sshuttle; then
   }
 fi
 
-# Touchpad
-if [[ -n "$(grep -i name /proc/bus/input/devices | grep -iP 'touch(pad)?')" ]]; then
-  alias toff='xinput disable Elan\ Touchpad'
-  alias tonn='xinput enable Elan\ Touchpad'
-  ton() {
-    local lockfile="$XDG_RUNTIME_DIR/.touchpad-on.lock"
-    if [[ -a "$lockfile" ]]; then
-      xinput disable Elan\ Touchpad
-      rm "$lockfile"
-    else
-      xinput enable Elan\ Touchpad
-      touch "$lockfile"
-    fi
-  }
-fi
-
-# Wireless
-__IFACE="${$(ip a | grep -o -P '\d+:\s+(w[a-z0-9]+)')[(w)2]}"
-if [[ -n "$__IFACE" ]]; then
-  __command_exists rfkill && alias rfkill='sudo rfkill'
-  __command_exists aircheck && alias aircheck='sudo aircheck'
-  __command_exists wifite && alias wifite='sudo wifite'
-  __command_exists wifijammer && alias wifijammer='sudo wifijammer'
-  __command_exists airodump-ng && alias airod="sudo airodump-ng -i $__IFACE --wps --manufacturer"
-  __command_exists reaver && alias rvr="sudo reaver -i $__IFACE -K 1 -vv -b"
-  __command_exists macchanger && alias wmac="sudo macchanger -ab $__IFACE"
-fi
 
 # npm completion
 __npm_completion() {
@@ -328,19 +269,17 @@ fi
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-[[ -a "$ZDOTDIR/local-aliases.zsh" ]] && source "$ZDOTDIR/local-aliases.zsh"
+export PATH="$HOME/.opencode/bin:$PATH"
 
+# Codex
+export PATH="$HOME/.local/bin:$PATH"
+eval "$(codex completion zsh)"
+alias codex=cdx
 precmd() {
   if [[ -n "${CODEX_SESSION:-}" ]]; then
     echo -ne '\a' > /dev/tty
   fi
 }
-
-export PATH="$HOME/.opencode/bin:$PATH"
-eval "$(codex completion zsh)"
-
-# Codex installer
-export PATH="$HOME/.local/bin:$PATH"
 
 # Vite+ bin (https://viteplus.dev)
 . "$HOME/.vite-plus/env"
