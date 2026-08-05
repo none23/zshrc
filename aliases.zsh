@@ -33,6 +33,8 @@ alias dd='sudo dd bs=4M status=progress'
 
 alias df='df -h'
 
+# custom codex build
+alias codex=cdx
 
 # add sudo
 alias cfdisk 'sudo cfdisk'
