@@ -1,5 +1,8 @@
 # My zsh config
 
+The interactive configuration lives in a single `.zshrc`. `.zshenv` only
+contains environment setup that must also run for non-interactive shells.
+
 ## Installation
 
 ```zsh
