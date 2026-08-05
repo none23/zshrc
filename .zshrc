@@ -30,3 +30,6 @@ eval "$(codex completion zsh)"
 # >>> Codex installer >>>
 export PATH="/home/n/.local/bin:$PATH"
 # <<< Codex installer <<<
+
+# Vite+ bin (https://viteplus.dev)
+. "$HOME/.vite-plus/env"
