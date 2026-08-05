@@ -22,6 +22,7 @@ if __command_exists sfw; then
   alias pnpm='sfw pnpm'
   alias npm='sfw npm'
   alias yarn='sfw yarn'
+  alias bun='sfw bun'
 fi
 
 if __command_exists hub; then
