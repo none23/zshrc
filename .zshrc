@@ -23,3 +23,10 @@ precmd() {
 
 # opencode
 export PATH=/home/n/.opencode/bin:$PATH
+
+# codex
+eval "$(codex completion zsh)"
+
+# >>> Codex installer >>>
+export PATH="/home/n/.local/bin:$PATH"
+# <<< Codex installer <<<
