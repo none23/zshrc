@@ -274,7 +274,7 @@ export PATH="$HOME/.opencode/bin:$PATH"
 # Codex
 export PATH="$HOME/.local/bin:$PATH"
 eval "$(codex completion zsh)"
-alias codex=cdx
+# alias codex=cdx
 precmd() {
   if [[ -n "${CODEX_SESSION:-}" ]]; then
     echo -ne '\a' > /dev/tty
@@ -282,4 +282,12 @@ precmd() {
 }
 
 # Vite+ bin (https://viteplus.dev)
-. "$HOME/.vite-plus/env"
+if [[ -d "$HOME/.vite-plus" ]]; then
+  source "$HOME/.vite-plus/env"
+fi
+
+# BAML bin (https://boundaryml.com)
+if [[ -d "$HOME/.baml" ]]; then
+  source "$HOME/.baml/env"
+fi
+
